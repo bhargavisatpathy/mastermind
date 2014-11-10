@@ -1,0 +1,52 @@
+class mastermind REPL
+  def main
+    welcome message
+
+    takes input
+    input validity
+    instruction
+
+    if play
+      Loop till quit
+        play
+        output
+        input
+      loop end
+  end
+
+  def output(quit/sucess)
+    quit, end message
+    success -# of guess, time, win message
+  end
+
+end
+
+class Game
+  initialize
+    @board #track guess and associated feedback
+    @codemaker
+  end
+
+  def play
+    start message
+    start timer
+    loop start
+      take seq input
+      quit if input is return quit
+      validate input
+      call codemaker to generate feed back
+      if sequence match return success
+      else board - save guess and feedback
+        print the feedback
+    loop end
+  end
+
+end
+
+
+class codemaker
+  initialize
+    make secret code
+  end
+  generate feed back
+end
