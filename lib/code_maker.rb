@@ -18,11 +18,12 @@ class CodeMaker
   end
 
   def match_position(guess)
-    count = 0
-    code_length.times do |i|
-      count += 1 if guess[i] == code[i]
-    end
-    count
+    guess.chars.zip(code.chars).count { |x| x[0] == x[1] }
+    # count = 0
+    # code_length.times do |i|
+    #   count += 1 if guess[i] == code[i]
+    # end
+    # count
   end
 
   def match(guess)
