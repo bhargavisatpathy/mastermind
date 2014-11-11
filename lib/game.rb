@@ -1,64 +1,74 @@
 require_relative 'code_maker'
-require_relative 'user_interface'
+require_relative 'messages'
 
 class Game
-  WELCOME_MESSAGE = "I have generated a beginner sequence with four elements made up of: (r)ed,
-  (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n
-  What's your guess?"
 
-  INPUT_TOO_SHORT = "Guess is too short. Please enter a 4 letter guess"
-
-  INPUT_TOO_LONG = "Guess id too long. Please enter a 4 letter guess"
-
-  INPUT_INVALID = "Invalid input. Please enter r g b y letters only"
-
-  attr_reader :ui, :board, :codemaker
+  attr_reader :codemaker, :messages, :input, :instream, :outstream
   attr_accessor :guess_count
 
-  def initialize(user_interface = UserInterface.new)
-    @ui = user_interface
-    @guess_count = 0
-    @codemaker = CodeMaker.new
+  def initialize(instream, outstream, messages)
+    @instream     = instream
+    @outstream    = outstream
+    @guess_count  = 0
+    @codemaker    = CodeMaker.new
+    @messages     = messages
+    @input        = ""
   end
 
-  def play # game flow
-    ui.display(WELCOME_MESSAGE)
+  def play
+    # game flow
+    outstream.puts(messages.game_intro)
     start_time = Time.new
+
     loop do
 
-      input = ui.read
-      if input == 'q' || input == 'quit'
-        return PlayOutcome.new
-      elsif input.length < 4
-        ui.display(INPUT_TOO_SHORT)
+      @input = instream.gets.strip.downcase
+      case
+      when quit?
+        outstream.puts(messages.game_quit)
+        return 1
 
-      elsif input.length > 4
-        ui.display(INPUT_TOO_LONG)
+      when input_too_short?
+        outstream.puts(messages.input_too_short)
 
-      elsif input.match(/^[r|g|b|y]{4}$/) == nil
-        ui.display(INPUT_INVALID)
+      when input_too_long?
+        outstream.puts(messages.input_too_long)
+
+      when invalid_input?
+        outstream.puts(messages.invalid_input)
+
       else
         match_outcome = codemaker.match(input)
         if match_outcome.match_position_count == codemaker.code_length # exact match
-          return PlayOutcome.new(true, Time.new - start_time, self.guess_count + 1)
+          outstream.puts(messages.game_win(codemaker.code, @guess_count + 1, Time.new - start_time))
+          break
         else
-          self.guess_count = self.guess_count + 1
-          ui.display("#{input} has #{match_outcome.match_colors_count} of the correct elements with #{match_outcome.match_position_count} in the correct positions. \n
-          You've taken #{guess_count} guess")
+          @guess_count += 1
+          outstream.puts(
+            messages.guess_again(
+              input, match_outcome.match_colors_count,
+              match_outcome.match_position_count,
+              guess_count))
         end
       end
     end
-  end
-end
 
-class PlayOutcome
-  attr_reader :success, :time, :guess_count
-  def initialize (success = false, time = 0, guess_count = 0)
-    @success = success
-    @time = time
-    @guess_count = guess_count
   end
-end
 
-# game = Game.new
-# game.play
+  def quit?
+    input == 'q' || input == 'quit'
+  end
+
+  def input_too_short?
+    input.length < 4
+  end
+
+  def input_too_long?
+    input.length > 4
+  end
+
+  def invalid_input?
+    input.match(/^[r|g|b|y]{4}$/) == nil
+  end
+
+end
