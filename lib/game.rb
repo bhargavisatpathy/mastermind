@@ -3,21 +3,21 @@ require_relative 'messages'
 
 class Game
 
-  attr_reader :codemaker, :messages, :input, :instream, :outstream
-  attr_accessor :guess_count
+  attr_reader :codemaker, :messages, :instream, :outstream
+  attr_accessor :guess_count, :input
 
-  def initialize(instream, outstream, messages)
+  def initialize(instream, outstream, messages, codemaker = CodeMaker.new)
     @instream     = instream
     @outstream    = outstream
     @guess_count  = 0
-    @codemaker    = CodeMaker.new
+    @codemaker    = codemaker
     @messages     = messages
     @input        = ""
   end
 
   def play
     # game flow
-    outstream.puts(messages.game_intro)
+    outstream.puts(messages.play_intro)
     start_time = Time.new
 
     loop do
@@ -40,12 +40,15 @@ class Game
       else
         match_outcome = codemaker.match(input)
         if match_outcome.match_position_count == codemaker.code_length # exact match
-          outstream.puts(messages.game_win(codemaker.code, @guess_count + 1, Time.new - start_time))
+          end_time = Time.new
+          minutes = ((end_time - start_time) / 60).floor
+          seconds = ((end_time - start_time) % 60).floor
+          #MatchOutcome.new({match_colors_count: match_colors(guess), match_position_count: match_position(guess)})
+          outstream.puts(messages.game_win(codemaker.code, @guess_count + 1, minutes, seconds))
           break
         else
           @guess_count += 1
-          outstream.puts(
-            messages.guess_again(
+          outstream.puts(messages.guess_again(
               input, match_outcome.match_colors_count,
               match_outcome.match_position_count,
               guess_count))

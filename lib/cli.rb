@@ -11,18 +11,17 @@ class CLI
     @outstream = outstream
   end
 
-def call
-    outstream.puts messages.program_intro
-    until finished? #loop
-      @command = instream.gets.strip.downcase # read
-      process_initial_commands #eval
-       #print
+  def call
+    outstream.puts messages.game_intro
+    until quit?
+      @command = instream.gets.strip.downcase
+      process_initial_commands
     end
   end
 
   private
 
-  def process_initial_commands # eval
+  def process_initial_commands
     case
     when play?
       game = Game.new(instream, outstream, messages)
@@ -48,7 +47,7 @@ def call
     command == "i" || command == "instructions"
   end
 
-  def finished?
+  def quit?
     command == "q" || command == "quit"
   end
 end

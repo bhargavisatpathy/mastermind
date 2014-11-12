@@ -3,12 +3,12 @@ class CodeMaker
   attr_reader :code, :code_length, :color_length
 
   def initialize
-    @code_length = 4
+    @code_length  = 4
     @color_length = 4
-    @code = ""
+    @code         = ""
     code_length.times { @code += COLORS[rand(0..color_length-1)] }
   end
-
+  
   def match_colors(guess)
     count = 0
     COLORS.each do |color|
@@ -19,11 +19,6 @@ class CodeMaker
 
   def match_position(guess)
     guess.chars.zip(code.chars).count { |x| x[0] == x[1] }
-    # count = 0
-    # code_length.times do |i|
-    #   count += 1 if guess[i] == code[i]
-    # end
-    # count
   end
 
   def match(guess)

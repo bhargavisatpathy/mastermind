@@ -1,4 +1,4 @@
-gem 'minitest' '~> 5.2'
+gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 
@@ -20,7 +20,7 @@ class CodeMakerTest < Minitest::Test
 
   def test_give_feedback_for_partial_match
     codemaker = CodeMaker.new
-    match_outcome = codemaker.match("abcd")
+    match_outcome = codemaker.match("bryg")
     refute_equal codemaker.code_length, match_outcome.match_colors_count
     refute_equal codemaker.code_length, match_outcome.match_position_count
 end

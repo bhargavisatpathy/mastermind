@@ -1,20 +1,14 @@
 class Messages
-  def program_intro
+  def game_intro
     "Welcome to MASTERMIND""\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?"
   end
 
-  def game_intro
-    "I have generated a beginner sequence with four elements made up of: (r)ed,
-  (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\n
-  What's your guess?"
+  def play_intro
+    "\nI have generated a beginner sequence with four elements made up of:(r)ed, \n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\nWhat's your guess?"
   end
 
   def game_instructions
-    "Game instructions."
-  end
-
-  def game_command_request
-    "Enter your guess: "
+    "Mastermind in play mode generates a secret color sequence of 4 four elements using:\n(r)ed, (g)reen, (b)lue, and (y)ellow. You have to guess the sequence.\nEach of your guess will display the number of matching colors and positions.\nWhen your guess matches with the secret sequence, you WIN."
   end
 
   def game_quit
@@ -22,22 +16,19 @@ class Messages
   end
 
   def play_again
-    "Do you want to (p)lay again or (q)uit?"
+    "\nDo you want to (p)lay again or (q)uit?"
   end
 
-  def game_win(code, guess_count, time)
-    "Congratulations! You guessed the sequence #{code} in
-    #{guess_count} guesses over #{time}."
-
+  def game_win(code, guess_count, minutes, seconds)
+    "Congratulations! You guessed the sequence #{code} in #{guess_count} guesses over #{minutes} minutes #{seconds} seconds."
   end
 
   def guess_again(input, match_colors_count, match_position_count, guess_count)
-    "#{input} has #{match_colors_count} of the correct elements with #{match_position_count} in the correct positions. \n
-    You've taken #{guess_count} guess"
+    "#{input} has #{match_colors_count} of the correct elements with #{match_position_count} in the correct positions.\nYou've taken #{guess_count} guess.\nEnter your guess:"
   end
 
   def not_a_valid_command
-    "That's not a valid command." 
+    "That's not a valid command."
   end
 
   def input_too_short
