@@ -1,5 +1,6 @@
 require_relative 'code_maker'
 require_relative 'messages'
+require_relative 'timer'
 
 class Game
 
@@ -17,8 +18,7 @@ class Game
 
   end
 
-  def play
-    # game flow
+  def play # game flow
     outstream.puts messages.play_intro
     time.start_timer
     loop do
@@ -33,16 +33,14 @@ class Game
         outstream.puts messages.input_too_long
       when invalid_input?
         outstream.puts messages.invalid_input
-      else
-        #outstream.puts codemaker.code
+      else#outstream.puts codemaker.code
         match_outcome = codemaker.match input
         if match_outcome.match_position_count == codemaker.code_length # exact match
           outstream.puts messages.game_win(codemaker.code, @guess_count + 1, time.end_timer)
           break
         else
           @guess_count += 1
-          outstream.puts messages.guess_again(input, match_outcome.match_colors_count,
-              match_outcome.match_position_count, guess_count)
+          outstream.puts messages.guess_again(input, match_outcome.match_colors_count, match_outcome.match_position_count, guess_count)
         end
       end
     end
@@ -51,7 +49,7 @@ class Game
   def quit?
     input == 'q' || input == 'quit'
   end
-  
+
   def input_too_short?
     input.length < 4
   end
@@ -62,20 +60,5 @@ class Game
 
   def invalid_input?
     input.match(/^[r|g|b|y]{4}$/) == nil
-  end
-end
-
-class Timer
-
-  attr_reader :start_time
-
-  def start_timer
-    @start_time = Time.new
-  end
-  def end_timer
-    end_time = Time.new
-    minutes = ((end_time - start_time) / 60).floor
-    seconds = ((end_time - start_time) % 60).floor
-    [minutes, seconds]
   end
 end

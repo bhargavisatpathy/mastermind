@@ -32,15 +32,15 @@ class Messages
   end
 
   def input_too_short
-    "Guess is too short. Please enter a 4 letter guess"
+    "Guess is too short. Please enter a 4 letter guess."
   end
 
   def input_too_long
-    "Guess is too long. Please enter a 4 letter guess"
+    "Guess is too long. Please enter a 4 letter guess."
   end
 
   def invalid_input
-    "Invalid input. Please enter r g b y letters only"
+    "Invalid input. Please enter r g b y letters only."
   end
 
   def red(text)
