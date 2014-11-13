@@ -32,7 +32,7 @@ class CLI
       end
     when instructions?
       outstream.puts messages.game_instructions
-    when finished?
+    when quit?
       outstream.puts messages.game_quit
     else
       outstream.puts messages.not_a_valid_command

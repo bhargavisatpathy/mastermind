@@ -8,7 +8,7 @@ class CodeMaker
     @code         = ""
     code_length.times { @code += COLORS[rand(0..color_length-1)] }
   end
-  
+
   def match_colors(guess)
     count = 0
     COLORS.each do |color|

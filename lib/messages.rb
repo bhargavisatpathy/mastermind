@@ -19,8 +19,8 @@ class Messages
     "\nDo you want to (p)lay again or (q)uit?"
   end
 
-  def game_win(code, guess_count, minutes, seconds)
-    "Congratulations! You guessed the sequence #{code} in #{guess_count} guesses over #{minutes} minutes #{seconds} seconds."
+  def game_win(code, guess_count, time)
+    "Congratulations! You guessed the sequence #{code} in #{guess_count} guesses over #{time[0]} minutes #{time[1]} seconds."
   end
 
   def guess_again(input, match_colors_count, match_position_count, guess_count)
@@ -42,4 +42,5 @@ class Messages
   def invalid_input
     "Invalid input. Please enter r g b y letters only"
   end
+
 end
