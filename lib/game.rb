@@ -33,9 +33,9 @@ class Game
         outstream.puts messages.input_too_long
       when invalid_input?
         outstream.puts messages.invalid_input
-      else#outstream.puts codemaker.code
-        match_outcome = codemaker.match input
-        if match_outcome.match_position_count == codemaker.code_length # exact match
+      else
+        #outstream.puts codemaker.code
+        if exact_match?
           outstream.puts messages.game_win(codemaker.code, @guess_count + 1, time.end_timer)
           break
         else
@@ -44,6 +44,14 @@ class Game
         end
       end
     end
+  end
+
+  def exact_match?
+    match_outcome.match_position_count == codemaker.code_length # exact match
+  end
+
+  def match_outcome
+    codemaker.match input
   end
 
   def quit?

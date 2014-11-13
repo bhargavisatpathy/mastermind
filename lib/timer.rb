@@ -7,8 +7,8 @@ class Timer
   end
   def end_timer
     end_time = Time.new
-    minutes = ((end_time - start_time) / 60).floor
-    seconds = ((end_time - start_time) % 60).floor
+    minutes  = ((end_time - start_time) / 60).floor
+    seconds  = ((end_time - start_time) % 60).floor
     [minutes, seconds]
   end
 end

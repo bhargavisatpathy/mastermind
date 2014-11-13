@@ -9,10 +9,10 @@ class GameTest < Minitest::Test
 
   def test_play_negative
     #setup
-    instream = Minitest::Mock.new
+    instream  = Minitest::Mock.new
     outstream = Minitest::Mock.new
-    messages = Messages.new
-    game = Game.new(instream, outstream, messages)
+    messages  = Messages.new
+    game      = Game.new(instream, outstream, messages)
 
     # Expectations
     outstream.expect(:puts, [], [messages.play_intro])
@@ -32,13 +32,13 @@ class GameTest < Minitest::Test
 
   def test_play_positive
     #setup
-    instream = Minitest::Mock.new
-    outstream = Minitest::Mock.new
-    messages = Messages.new
-    codemaker = Minitest::Mock.new
-    timer = Minitest::Mock.new
-    expected_match_outcome =  MatchOutcome.new({match_colors_count: 4, match_position_count: 4})
-    game = Game.new(instream, outstream, messages, codemaker, timer)
+    instream               = Minitest::Mock.new
+    outstream              = Minitest::Mock.new
+    messages               = Messages.new
+    codemaker              = Minitest::Mock.new
+    timer                  = Minitest::Mock.new
+    expected_match_outcome = MatchOutcome.new({match_colors_count: 4, match_position_count: 4})
+    game                   = Game.new(instream, outstream, messages, codemaker, timer)
 
     #Expectations
     outstream.expect(:puts, [], [messages.play_intro])
