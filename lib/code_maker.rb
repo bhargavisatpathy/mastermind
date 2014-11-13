@@ -7,7 +7,7 @@ class CodeMaker
     @code_length  = 4
     @color_length = 4
     @code         = ""
-    code_length.times { @code += COLORS[rand(0..color_length-1)] }
+    code_length.times { @code += COLORS[rand(0..color_length - 1)] }
   end
 
   def match_colors(guess)
@@ -23,7 +23,7 @@ class CodeMaker
   end
 
   def match(guess)
-    MatchOutcome.new({match_colors_count: match_colors(guess), match_position_count: match_position(guess)})
+    MatchOutcome.new({ match_colors_count: match_colors(guess), match_position_count: match_position(guess) })
   end
 
 end

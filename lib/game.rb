@@ -34,7 +34,7 @@ class Game
       when invalid_input?
         outstream.puts messages.invalid_input
       else
-        #outstream.puts codemaker.code
+        # outstream.puts codemaker.code
         if exact_match?
           outstream.puts messages.game_win(codemaker.code, @guess_count + 1, time.end_timer)
           break
