@@ -1,5 +1,5 @@
-require 'game'
-require 'messages'
+require_relative '../lib/game'
+require_relative '../lib/messages'
 
 class CLI
   attr_reader :command, :messages, :instream, :outstream

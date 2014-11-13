@@ -4,7 +4,7 @@ class Messages
   end
 
   def play_intro
-    "\nI have generated a beginner sequence with four elements made up of:(r)ed, \n(g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game.\nWhat's your guess?"
+    "\nI have generated a beginner sequence with four elements made up of:" + red('(r)ed') + ", \n" + green('(g)reen') + ", " + blue('(b)lue') + ", and " + yellow('(y)ellow') + ". Use (q)uit at any time to end the game.\nWhat's your guess?"
   end
 
   def game_instructions
@@ -43,4 +43,16 @@ class Messages
     "Invalid input. Please enter r g b y letters only"
   end
 
+  def red(text)
+    "\e[31m#{text}\e[0m"
+  end
+  def green(text)
+    "\e[32m#{text}\e[0m"
+  end
+  def blue(text)
+    "\e[34m#{text}\e[0m"
+  end
+  def yellow(text)
+    "\e[33m#{text}\e[0m"
+  end
 end

@@ -51,7 +51,7 @@ class Game
   def quit?
     input == 'q' || input == 'quit'
   end
-
+  
   def input_too_short?
     input.length < 4
   end
